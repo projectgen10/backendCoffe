@@ -1,19 +1,37 @@
 package com.example.coffe.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_menu")
 public class Menu {
     @Id
+    @Column(name = "id_menu")
     private Integer idMenu;
+    @Column(name = "nama_menu")
     private String namaMenu;
+    @Column(name = "id_jenis")
     private Integer idJenis;
+    @Column(name = "stock")
     private int stock;
+    @Column(name = "harga")
     private double harga;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn ("id_jenis", insertable = false, updatable = false)
+    @Fetch(FetchMode.JOIN)
+    private Jenis jenis;
+
+    public Jenis getJenis(){
+        return jenis;
+    }
+    
+    public void setJenis(Jenis jenis){
+        this.jenis = jenis;
+    }
 
     public Integer getIdMenu() {
         return idMenu;
