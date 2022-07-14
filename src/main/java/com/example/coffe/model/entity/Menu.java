@@ -21,14 +21,14 @@ public class Menu {
     private double harga;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn ("id_jenis", insertable = false, updatable = false)
+    @JoinColumn (value = idJenis, insertable = false, updatable = false)
     @Fetch(FetchMode.JOIN)
     private Jenis jenis;
 
     public Jenis getJenis(){
         return jenis;
     }
-    
+
     public void setJenis(Jenis jenis){
         this.jenis = jenis;
     }
