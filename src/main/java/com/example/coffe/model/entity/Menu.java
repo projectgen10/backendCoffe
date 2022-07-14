@@ -21,7 +21,7 @@ public class Menu {
     private double harga;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (value = idJenis, insertable = false, updatable = false)
+//    @JoinColumn (value = idJenis, insertable = false, updatable = false)
     @Fetch(FetchMode.JOIN)
     private Jenis jenis;
 
