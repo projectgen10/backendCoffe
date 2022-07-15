@@ -13,7 +13,8 @@ public class Pembeli {
     @Column(name = "id_pembeli")
     private Integer id;
 
-    @Column(name = "status")
+    @Column(name = "id_user")
+    private Integer idUser;
     private String status;
 
 
@@ -31,5 +32,13 @@ public class Pembeli {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 }

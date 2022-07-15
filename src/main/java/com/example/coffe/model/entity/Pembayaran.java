@@ -12,23 +12,13 @@ public class Pembayaran {
 
     @Column(name = "id_pembayaran")
     private Integer id;
-    @Column(name = "qty")
+
     private int qty;
-    @Column(name = "price")
+
     private Double price;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_user", insertable = false, updatable = false)
-//    @Fetch(FetchMode.JOIN)
-//    private Login login;
-//
-//    public Login getLogin() {
-//        return login;
-//    }
-//
-//    public void setLogin(Login login) {
-//        this.login = login;
-//    }
+    @Column(name = "id_user")
+    private Integer idUser;
 
     public Integer getId() {
         return id;
@@ -52,5 +42,13 @@ public class Pembayaran {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 }
