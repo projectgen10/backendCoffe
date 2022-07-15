@@ -5,8 +5,8 @@ public class MenuDto {
     private Integer idMenu;
     private Integer idjenis;
     private String namaMenu;
-    private int stock;
-    private double harga;
+    private Integer stock;
+    private Double harga;
 
     public String getNamaMenu() {
         return namaMenu;
@@ -16,19 +16,19 @@ public class MenuDto {
         this.namaMenu = namaMenu;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public double getHarga() {
+    public Double getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
+    public void setHarga(Double harga) {
         this.harga = harga;
     }
 

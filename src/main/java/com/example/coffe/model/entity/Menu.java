@@ -16,9 +16,9 @@ public class Menu {
     @Column(name = "id_jenis")
     private Integer idJenis;
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
     @Column(name = "harga")
-    private double harga;
+    private Double harga;
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn (value = idJenis, insertable = false, updatable = false)
@@ -57,19 +57,19 @@ public class Menu {
         this.idJenis = idJenis;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public double getHarga() {
+    public Double getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
+    public void setHarga(Double harga) {
         this.harga = harga;
     }
 }
