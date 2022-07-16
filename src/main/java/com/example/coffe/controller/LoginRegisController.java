@@ -2,6 +2,7 @@ package com.example.coffe.controller;
 
 import com.example.coffe.model.dto.AdminDto;
 import com.example.coffe.model.dto.DefaultResponse;
+import com.example.coffe.model.dto.RegisResponse;
 import com.example.coffe.model.dto.UserDto;
 import com.example.coffe.model.entity.Admin;
 import com.example.coffe.model.entity.User;
@@ -22,7 +23,7 @@ public class LoginRegisController {
     @Autowired
     private LoginUserRepository loginUserRepository;
 
-    @GetMapping ("/user")
+    @PostMapping("/user")
     public DefaultResponse login(@RequestBody UserDto userDto){
         DefaultResponse df = new DefaultResponse();
         Optional<User> optionalUser = loginUserRepository.findByNoTelpAndPass(userDto.getNoTelp(), userDto.getPass());
@@ -38,7 +39,7 @@ public class LoginRegisController {
 
     }
 
-    @GetMapping("/admin")
+    @PostMapping("/admin")
     public DefaultResponse login(@RequestBody AdminDto adminDto){
         DefaultResponse df = new DefaultResponse();
         Optional<Admin> optionalAdmin = loginAdminRepository.findByNoTelpAndPass(adminDto.getNoTelp(), adminDto.getPass());
@@ -52,6 +53,55 @@ public class LoginRegisController {
         }
         return df;
 
+    }
+    @PostMapping("/reguser")
+    public RegisResponse<UserDto> regisUser(@RequestBody UserDto userDto){
+        User user = convertDtoEnUser(userDto);
+        RegisResponse<UserDto> responses = new RegisResponse<>();
+        Optional<User> optional = loginUserRepository.findByNoTelpAndPass(userDto.getNoTelp(), userDto.getPass());
+        if(optional.isPresent()){
+            responses.setMessages("Error, Data Sudah Tersedia. Silahkan login");
+        } else {
+            loginUserRepository.save(user);
+            responses.setMessages("Berhasil Register");
+            responses.setData(userDto);
+        }
+        return responses;
+    }
+
+    @PostMapping("/regadmin")
+    public RegisResponse<AdminDto> regisAdmin(@RequestBody AdminDto adminDto){
+        Admin admin = convertDtoEnAdmin(adminDto);
+        RegisResponse<AdminDto> responses = new RegisResponse<>();
+        Optional<Admin> optional = loginAdminRepository.findByNoTelpAndPass(adminDto.getNoTelp(), adminDto.getPass());
+        if(optional.isPresent()){
+            responses.setMessages("Error, Data Sudah Tersedia. Silahkan login");
+        } else {
+            loginAdminRepository.save(admin);
+            responses.setMessages("Berhasil Register");
+            responses.setData(adminDto);
+        }
+        return responses;
+    }
+
+    public User convertDtoEnUser(UserDto dto){
+        User user = new User();
+        user.setIdUser(dto.getIdUser());
+        user.setAlamat(dto.getAlamat());
+        user.setNama(dto.getNama());
+        user.setNoTelp(dto.getNoTelp());
+        user.setPass(dto.getPass());
+        return user;
+    }
+
+    public Admin convertDtoEnAdmin(AdminDto dto){
+        Admin admin = new Admin();
+        admin.setIdAdmin(dto.getIdAdmin());
+        admin.setAlamat(dto.getAlamat());
+        admin.setNama(dto.getNama());
+        admin.setNoTelp(dto.getNoTelp());
+        admin.setPass(dto.getPass());
+        return admin;
     }
 
 

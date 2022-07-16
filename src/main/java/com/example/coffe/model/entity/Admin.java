@@ -11,8 +11,9 @@ public class Admin {
     @Id
     @Column(name = "id_admin")
     private Integer idAdmin;
-    @Column(name = "no_telp")
+    @Column(name = "no_telp", nullable = false)
     private String noTelp;
+    @Column(nullable = false)
     private String pass;
     private String alamat;
     private String nama;
