@@ -19,14 +19,19 @@ public class MenuController {
     @PostMapping("/pilihan")
     public DefaultResponse pilihan(@RequestBody MenuDto menuDto){
 
+        Optional<Menu> optionalMenu = menuRepository.findByIdIdMenu(menuDto.getIdMenu());
         DefaultResponse df = new DefaultResponse();
-        df.setStatus(Boolean.TRUE);
-        df.setMessage("Menu yang anda pilih = Kopi Sehat");
-
+        if (optionalMenu.isPresent()){
+            df.setStatus(Boolean.TRUE);
+            df.setMessage("Menu yang anda pilih = Kopi Sehat");
+        } else{
+            df.setStatus(Boolean.FALSE);
+            df.setMessage("Menu yang anda pilih tidak tersedia");
+        }
         return df;
     }
     @GetMapping("/byid/{idmenu}")
-    public DefaultResponse getByIdMenu(@PathVariable Integer idMenu){
+    public DefaultResponse getByidMenu(@PathVariable Integer idMenu){
 
         DefaultResponse df = new DefaultResponse();
         Optional<Menu> menuOps =  menuRepository.findById(idMenu);
