@@ -19,7 +19,7 @@ public class MenuController {
     @PostMapping("/pilihan")
     public DefaultResponse pilihan(@RequestBody MenuDto menuDto){
 
-        Optional<Menu> optionalMenu = menuRepository.findByIdIdMenu(menuDto.getIdMenu());
+        Optional<Menu> optionalMenu = menuRepository.findById(menuDto.getIdMenu());
         DefaultResponse df = new DefaultResponse();
         if (optionalMenu.isPresent()){
             df.setStatus(Boolean.TRUE);
