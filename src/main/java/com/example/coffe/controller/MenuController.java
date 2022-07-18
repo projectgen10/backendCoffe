@@ -23,7 +23,7 @@ public class MenuController {
         DefaultResponse df = new DefaultResponse();
         if (optionalMenu.isPresent()){
             df.setStatus(Boolean.TRUE);
-            df.setMessage("Menu yang anda pilih = Kopi Sehat");
+            df.setMessage("Menu yang anda pilih telah tersimpan ");
         } else{
             df.setStatus(Boolean.FALSE);
             df.setMessage("Menu yang anda pilih tidak tersedia");
@@ -37,7 +37,7 @@ public class MenuController {
         Optional<Menu> menuOps =  menuRepository.findById(idMenu);
         if (menuOps.isPresent()){
             df.setStatus(Boolean.TRUE);
-            df.setMessage("Menu yang anda pilih = Kopi Sehat");
+            df.setMessage("Menu yang anda pilih telah tersimpan );
         } else{
             df.setStatus(Boolean.FALSE);
             df.setMessage("Menu yang anda pilih tidak tersedia");
