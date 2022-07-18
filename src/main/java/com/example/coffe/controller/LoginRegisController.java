@@ -1,9 +1,6 @@
 package com.example.coffe.controller;
 
-import com.example.coffe.model.dto.AdminDto;
-import com.example.coffe.model.dto.DefaultResponse;
-import com.example.coffe.model.dto.RegisResponse;
-import com.example.coffe.model.dto.UserDto;
+import com.example.coffe.model.dto.*;
 import com.example.coffe.model.entity.Admin;
 import com.example.coffe.model.entity.User;
 import com.example.coffe.repository.LoginAdminRepository;
@@ -24,9 +21,9 @@ public class LoginRegisController {
     private LoginUserRepository loginUserRepository;
 
     @PostMapping("/user")
-    public DefaultResponse login(@RequestBody UserDto userDto){
+    public DefaultResponse login(@RequestBody LoginUserDto loginUserDto){
         DefaultResponse df = new DefaultResponse();
-        Optional<User> optionalUser = loginUserRepository.findByNoTelpAndPass(userDto.getNoTelp(), userDto.getPass());
+        Optional<User> optionalUser = loginUserRepository.findByNoTelpAndPass(loginUserDto.getNoTelp(), loginUserDto.getPass());
 
         if(optionalUser.isPresent()){
             df.setStatus(Boolean.TRUE);
@@ -40,9 +37,9 @@ public class LoginRegisController {
     }
 
     @PostMapping("/admin")
-    public DefaultResponse login(@RequestBody AdminDto adminDto){
+    public DefaultResponse login(@RequestBody LoginAdminDto loginAdminDto){
         DefaultResponse df = new DefaultResponse();
-        Optional<Admin> optionalAdmin = loginAdminRepository.findByNoTelpAndPass(adminDto.getNoTelp(), adminDto.getPass());
+        Optional<Admin> optionalAdmin = loginAdminRepository.findByNoTelpAndPass(loginAdminDto.getNoTelp(), loginAdminDto.getPass());
 
         if(optionalAdmin.isPresent()){
             df.setStatus(Boolean.TRUE);
