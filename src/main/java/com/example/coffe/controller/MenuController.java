@@ -105,10 +105,10 @@ public class MenuController {
 
     public MenuDto convertEntityToDto(Menu entity) {
         MenuDto dto = new MenuDto();
-        dto.setIdMenu(dto.getIdMenu());
-        dto.setNamaMenu(dto.getNamaMenu());
-        dto.setStock(dto.getStock());
-        dto.setHarga(dto.getHarga());
+        dto.setIdMenu(entity.getIdMenu());
+        dto.setNamaMenu(entity.getNamaMenu());
+        dto.setStock(entity.getStock());
+        dto.setHarga(entity.getHarga());
         return dto;
     }
 }
