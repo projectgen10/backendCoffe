@@ -1,8 +1,9 @@
 package com.example.coffe.model.dto;
 
-public class DefaultResponse {
+public class DefaultResponse<T> {
     private Boolean status;
     private String message;
+    private T Data;
 
     public Boolean getStatus() {
         return status;
@@ -18,5 +19,13 @@ public class DefaultResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public T getData() {
+        return Data;
+    }
+
+    public void setData(T data) {
+        Data = data;
     }
 }

@@ -53,11 +53,11 @@ public class MenuController {
     public DefaultResponse<MenuDto> saveMenu(@RequestBody MenuDto menuDto) {
         Menu menu = convertDtoToEntity(menuDto);
         DefaultResponse<MenuDto> response = new DefaultResponse<>();
-        Optional<Menu> optional = menurepository.findByidMenu(menuDto.getIdMenu());
+        Optional<Menu> optional = menuRepository.findById (menuDto.getIdMenu());
         if (optional.isPresent()) {
             response.setMessage("ERROR, DATA MENU TELAH TERSEDIA");
         } else {
-            menurepository.save(menu);
+            menuRepository.save(menu);
             response.setMessage("DATA MENU BERHASIL TERSIMPAN");
             response.setData(menuDto);
         }
@@ -67,7 +67,7 @@ public class MenuController {
     @GetMapping("/listmenu")
     public List<MenuDto> getListMenu() {
         List<MenuDto> list = new ArrayList<>();
-        for (Menu m : menurepository.findAll()) {
+        for (Menu m : menuRepository.findAll()) {
             list.add(convertEntityToDto(m));
         }
         return list;
