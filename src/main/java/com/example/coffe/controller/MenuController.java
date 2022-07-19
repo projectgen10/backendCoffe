@@ -73,27 +73,6 @@ public class MenuController {
         return list;
     }
 
-//    public List<MenuDto> listData() {
-//        List<MenuDto> list = new ArrayList<>();
-//        MenuDto m = new MenuDto();
-//        m.setIdMenu(001);
-//        m.setIdjenis(001);
-//        m.setNamaMenu("Kopi Busuk");
-//        m.setStock(50);
-//        m.setHarga(10000.0);
-//
-//        list.add(m);
-//
-//        MenuDto menuDto = new MenuDto();
-//        menuDto.setIdMenu(002);
-//        menuDto.setIdjenis(001);
-//        menuDto.setNamaMenu("Kopi Susu");
-//        menuDto.setStock(50);
-//        menuDto.setHarga(8000.0);
-//        list.add(menuDto);
-//        return list;
-//    }
-
     public Menu convertDtoToEntity(MenuDto dto) {
         Menu entity = new Menu();
         entity.setIdMenu(dto.getIdMenu());
