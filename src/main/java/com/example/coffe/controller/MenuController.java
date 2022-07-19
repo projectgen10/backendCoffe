@@ -53,7 +53,7 @@ public class MenuController {
     public DefaultResponse<MenuDto> saveMenu(@RequestBody MenuDto menuDto) {
         Menu menu = convertDtoToEntity(menuDto);
         DefaultResponse<MenuDto> response = new DefaultResponse<>();
-        Optional<Menu> optional = menuRepository.findById (menuDto.getIdMenu());
+        Optional<Menu> optional = menuRepository.findById(menuDto.getIdMenu());
         if (optional.isPresent()) {
             response.setMessage("ERROR, DATA MENU TELAH TERSEDIA");
         } else {
