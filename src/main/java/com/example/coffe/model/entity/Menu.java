@@ -20,9 +20,8 @@ public class Menu {
     @Column(name = "harga")
     private Double harga;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn (value = idJenis, insertable = false, updatable = false)
-    @Fetch(FetchMode.JOIN)
+    @OneToOne
+    @JoinColumn (name = "id_jenis", insertable = false, updatable = false)
     private Jenis jenis;
 
     public Jenis getJenis(){
