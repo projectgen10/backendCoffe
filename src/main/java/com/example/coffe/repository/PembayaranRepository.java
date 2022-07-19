@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PembayaranRepository extends JpaRepository<Pembayaran, Integer> {
 
-//    @Query (
-//            value = "select new com.example.coffe.model.dto.PembayaranDto(p.id, p.qty, p.nama, p.price) from Pembayaran p inner join User u on u.idUser = p.idUser"
-//    )
-//    List<Pembayaran> getAllPembayaran();
+    Optional<Pembayaran> findById(Integer qty);
 }

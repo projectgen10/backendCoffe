@@ -81,6 +81,34 @@ public class LoginRegisController {
         return responses;
     }
 
+    @PostMapping("/deluser")
+    public RegisResponse<UserDto> delUser(@RequestBody UserDto userDto){
+        User user = convertDtoEnUser(userDto);
+        RegisResponse<UserDto> responses = new RegisResponse<>();
+        Optional<User> optional = loginUserRepository.findById(userDto.getIdUser());
+        if(optional.isPresent()){
+            loginUserRepository.delete(user);
+            responses.setMessages("Data berhasil dihapus");
+        } else {
+            responses.setMessages("Informasi salah. Data tidak dapat dihapus");
+        }
+        return responses;
+    }
+
+    @PostMapping("/deladmin")
+    public RegisResponse<AdminDto> delAdmin(@RequestBody AdminDto adminDto){
+        Admin admin = convertDtoEnAdmin(adminDto);
+        RegisResponse<AdminDto> responses = new RegisResponse<>();
+        Optional<Admin> optional = loginAdminRepository.findById(adminDto.getIdAdmin());
+        if(optional.isPresent()){
+            loginAdminRepository.delete(admin);
+            responses.setMessages("Data berhasil dihapus");
+        } else {
+            responses.setMessages("Informasi salah. Data tidak dapat dihapus");
+        }
+        return responses;
+    }
+
     public User convertDtoEnUser(UserDto dto){
         User user = new User();
         user.setIdUser(dto.getIdUser());
