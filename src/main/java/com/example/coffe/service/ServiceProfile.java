@@ -5,7 +5,7 @@ import com.example.coffe.model.entity.User;
 
 public interface ServiceProfile {
 
-    void updateProfileUser(Integer idUser, User user);
+    void updateProfileUser(User user);
 
-    void updateProfileAdmin(Integer idAmin, Admin admin);
+    void updateProfileAdmin(Admin admin);
 }
