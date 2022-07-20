@@ -4,7 +4,10 @@ import com.example.coffe.model.dto.DefaultResponse;
 import com.example.coffe.model.dto.MenuDto;
 import com.example.coffe.model.entity.Menu;
 import com.example.coffe.repository.MenuRepository;
+import com.example.coffe.service.ServiceMenu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,6 +20,9 @@ public class MenuController {
 
     @Autowired
     private MenuRepository menuRepository;
+
+    @Autowired
+    ServiceMenu serviceMenu;
 
     @PostMapping("/pilihan")
     public DefaultResponse pilihan(@RequestBody MenuDto menuDto) {
@@ -33,7 +39,7 @@ public class MenuController {
         return df;
     }
 
-    @GetMapping("/byid/{idmenu}")
+    @GetMapping({"/byid/{idMenu}"})
     public DefaultResponse getByidMenu(@PathVariable Integer idMenu) {
 
         DefaultResponse df = new DefaultResponse();
@@ -71,6 +77,18 @@ public class MenuController {
             list.add(convertEntityToDto(m));
         }
         return list;
+    }
+
+    @PutMapping({"/{idMenu}"})
+    public ResponseEntity<Menu> updateMenu(@PathVariable("idMenu") Integer idMenu, @RequestBody Menu menu) {
+        serviceMenu.updateMenu(idMenu, menu);
+        return new ResponseEntity<>(serviceMenu.getMenuByidMenu(idMenu), HttpStatus.OK);
+    }
+
+    @DeleteMapping({"/{idMenu}"})
+    public ResponseEntity<Menu> deleteMenu(@PathVariable("idMenu") Integer idMenu) {
+        serviceMenu.deleteMenu(idMenu);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public Menu convertDtoToEntity(MenuDto dto) {

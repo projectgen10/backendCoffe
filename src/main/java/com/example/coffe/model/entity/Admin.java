@@ -9,9 +9,8 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "pny_admin")
     @Column(name = "id_admin")
     private Integer idAdmin;
-    @Column(name = "no_telp", nullable = false)
+    @Column(name = "no_telp")
     private String noTelp;
-    @Column(nullable = false)
     private String pass;
     private String alamat;
     private String nama;

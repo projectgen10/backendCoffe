@@ -79,11 +79,38 @@ public class ProfileController {
         return responses;
     }
 
+<<<<<<< HEAD
     @PutMapping({"/{id_user}"})
     public ResponseEntity<User> updatePembayaran(@PathVariable("id_user") Integer idUser,
                                                        @RequestBody User user) {
         serviceAdminUser.updateProfileUser(idUser, user);
         return new ResponseEntity<>(serviceAdminUser.getPembById(idUser), HttpStatus.OK);
+=======
+    @PutMapping("/updateus")
+    public RegisResponse<User> updateLog(@RequestBody User user){
+        RegisResponse<User> responses = new RegisResponse<>();
+        Optional<User> optional = loginUserRepository.findById(user.getIdUser());
+        if(optional.isPresent()){
+            serviceAdminUser.updateProfileUser(user);
+            responses.setMessages("Data berhasil di update");
+        } else {
+            responses.setMessages("Error. Data tidak dapat di update");
+        }
+        return responses;
+    }
+
+    @PutMapping("/updatead")
+    public RegisResponse<Admin> updateLog(@RequestBody Admin admin){
+        RegisResponse<Admin> responses = new RegisResponse<>();
+        Optional<Admin> optional = loginAdminRepository.findById(admin.getIdAdmin());
+        if(optional.isPresent()){
+            serviceAdminUser.updateProfileAdmin(admin);
+            responses.setMessages("Data berhasil di update");
+        } else {
+            responses.setMessages("Error. Data tidak dapat di update");
+        }
+        return responses;
+>>>>>>> 2ed540c3c6164970d7ac50392b3e8b22a3224dec
     }
 
 
