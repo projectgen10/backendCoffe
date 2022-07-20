@@ -17,19 +17,14 @@ public class ServiceAdminUser implements ServiceProfile{
     LoginAdminRepository loginAdminRepository;
 
 
-    @Override
-<<<<<<< HEAD
-    public User getPembById(Integer idUser) {
-        return loginUserRepository.findById(idUser).get();
-    }
+//    @Override
+//    public User getPembById(Integer idUser) {
+//        return loginUserRepository.findById(idUser).get();
+//    }
 
     @Override
     public void updateProfileUser(Integer idUser, User user) {
-        User user1 = loginUserRepository.findById(idUser).get();
-=======
-    public void updateProfileUser(User user) {
         User user1 = loginUserRepository.findById(user.getIdUser()).get();
->>>>>>> 2ed540c3c6164970d7ac50392b3e8b22a3224dec
         user1.setPass(user.getPass());
         user1.setNama(user.getNama());
         user1.setAlamat(user.getAlamat());
@@ -38,7 +33,7 @@ public class ServiceAdminUser implements ServiceProfile{
     }
 
     @Override
-    public void updateProfileAdmin(Admin admin) {
+    public void updateProfileAdmin(Integer idAmin, Admin admin) {
         Admin admin1 = loginAdminRepository.findById(admin.getIdAdmin()).get();
         admin1.setPass(admin.getPass());
         admin1.setNoTelp(admin.getNoTelp());
