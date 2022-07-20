@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
     @Id
     // ini generatenya masih error
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", nullable = false)
     private Integer idUser;
     @Column(name = "no_telp")
