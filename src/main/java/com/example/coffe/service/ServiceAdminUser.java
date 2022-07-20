@@ -18,12 +18,17 @@ public class ServiceAdminUser implements ServiceProfile{
 
 
     @Override
+    public User getPembById(Integer idUser) {
+        return loginUserRepository.findById(idUser).get();
+    }
+
+    @Override
     public void updateProfileUser(Integer idUser, User user) {
         User user1 = loginUserRepository.findById(idUser).get();
         user1.setPass(user.getPass());
         user1.setNama(user.getNama());
         user1.setAlamat(user.getAlamat());
-        user1.setPass(user.getPass());
+        user1.setNoTelp(user.getNoTelp());
         loginUserRepository.save(user1);
     }
 

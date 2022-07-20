@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/pembayaran")
 public class PembayaranController {
@@ -43,22 +44,22 @@ public class PembayaranController {
     //update Data pembayaran
     @PutMapping({"/{id_pembayaran}"})
     public ResponseEntity<Pembayaran> updatePembayaran(@PathVariable("id_pembayaran") Integer id_pemb,
-                                                       @RequestBody Pembayaran pembayaran){
+                                                       @RequestBody Pembayaran pembayaran) {
         servicePembayaran.updatePembayaran(id_pemb, pembayaran);
         return new ResponseEntity<>(servicePembayaran.getPembById(id_pemb), HttpStatus.OK);
     }
 
-    @DeleteMapping({"/{id_pembayaran}"})
-    public ResponseEntity<Pembayaran> deletePembayaran(@PathVariable("id_pembayaran")Integer id_pemb){
+    @DeleteMapping("/{id_pembayaran}")
+    public ResponseEntity<Pembayaran> deletePembayaran(@PathVariable("id_pembayaran") Integer id_pemb) {
         servicePembayaran.deletePembayaran(id_pemb);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/pembayarann/{id}")
-    public PembayaranGabunganDto getListPembayar(@PathVariable Integer id){
+    public PembayaranGabunganDto getListPembayar(@PathVariable Integer id) {
         Optional<Detail_Pembayaran> detail_pembayaran = detailPembayaranRepository.findById(id);
         PembayaranGabunganDto dto = new PembayaranGabunganDto();
-        if (detail_pembayaran.isPresent()){
+        if (detail_pembayaran.isPresent()) {
             Detail_Pembayaran detailPembayaran1 = detail_pembayaran.get();
             dto.setNama(detailPembayaran1.getUser().getNama());
             dto.setNamaJenis(detailPembayaran1.getJenis().getNamaJenis());
@@ -72,7 +73,7 @@ public class PembayaranController {
     @GetMapping("pembayaran")
     public List<PembayaranDto> getListPembayaran() {
         List<PembayaranDto> list = new ArrayList();
-        for (Pembayaran pembayaran : pembayaranRepository.findAll()){
+        for (Pembayaran pembayaran : pembayaranRepository.findAll()) {
             list.add(convertEntityPembayaran(pembayaran));
         }
         return list;
@@ -81,13 +82,13 @@ public class PembayaranController {
     @GetMapping("/detailpembayarann")
     public List<PembayaranGabunganDto> getListDetailPembayaran() {
         List<PembayaranGabunganDto> list = new ArrayList();
-        for (Detail_Pembayaran p : detailPembayaranRepository.findAll()){
+        for (Detail_Pembayaran p : detailPembayaranRepository.findAll()) {
             list.add(convertEntityDetailPembayaran(p));
         }
         return list;
     }
 
-    public PembayaranDto convertEntityPembayaran(Pembayaran entity){
+    public PembayaranDto convertEntityPembayaran(Pembayaran entity) {
         PembayaranDto dtoo = new PembayaranDto();
         dtoo.setQty(entity.getQty());
         dtoo.setPrice(entity.getPrice());
@@ -95,7 +96,7 @@ public class PembayaranController {
         return dtoo;
     }
 
-    public PembayaranGabunganDto convertEntityDetailPembayaran(Detail_Pembayaran entity){
+    public PembayaranGabunganDto convertEntityDetailPembayaran(Detail_Pembayaran entity) {
         PembayaranGabunganDto dto = new PembayaranGabunganDto();
         dto.setNama(entity.getUser().getNama());
         dto.setNamaMenu(entity.getMenu().getNamaMenu());

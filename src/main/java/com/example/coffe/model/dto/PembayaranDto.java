@@ -2,7 +2,6 @@ package com.example.coffe.model.dto;
 
 public class PembayaranDto {
 
-    private Integer id_pemb;
     private Integer qty;
     private Double price;
 
