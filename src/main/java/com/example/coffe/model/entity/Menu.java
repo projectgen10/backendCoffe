@@ -4,6 +4,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_menu")
@@ -20,9 +21,9 @@ public class Menu {
     @Column(name = "harga")
     private Double harga;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn (name = "id_jenis", insertable = false, updatable = false)
-    private Jenis jenis;
+    private List<Jenis> jenis;
 
     public Jenis getJenis(){
         return jenis;

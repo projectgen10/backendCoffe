@@ -17,10 +17,10 @@ public class ServiceAdminUser implements ServiceProfile{
     LoginAdminRepository loginAdminRepository;
 
 
-    @Override
-    public User getPemById(Integer idUser) {
-        return loginUserRepository.findById(idUser).get();
-    }
+//    @Override
+//    public User getPembById(Integer idUser) {
+//        return loginUserRepository.findById(idUser).get();
+//    }
 
     @Override
     public void updateProfileUser(Integer idUser, User user) {
