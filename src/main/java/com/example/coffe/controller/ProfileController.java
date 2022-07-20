@@ -79,52 +79,32 @@ public class ProfileController {
         return responses;
     }
 
-<<<<<<< HEAD
-    @PutMapping({"/{id_user}"})
-    public ResponseEntity<User> updatePembayaran(@PathVariable("id_user") Integer idUser,
-                                                       @RequestBody User user) {
-        serviceAdminUser.updateProfileUser(idUser, user);
-        return new ResponseEntity<>(serviceAdminUser.getPembById(idUser), HttpStatus.OK);
-=======
-    @PutMapping("/updateus")
-    public RegisResponse<User> updateLog(@RequestBody User user){
-        RegisResponse<User> responses = new RegisResponse<>();
-        Optional<User> optional = loginUserRepository.findById(user.getIdUser());
-        if(optional.isPresent()){
-            serviceAdminUser.updateProfileUser(user);
-            responses.setMessages("Data berhasil di update");
-        } else {
-            responses.setMessages("Error. Data tidak dapat di update");
-        }
-        return responses;
-    }
 
-    @PutMapping("/updatead")
-    public RegisResponse<Admin> updateLog(@RequestBody Admin admin){
-        RegisResponse<Admin> responses = new RegisResponse<>();
-        Optional<Admin> optional = loginAdminRepository.findById(admin.getIdAdmin());
+    @PutMapping("/updatead/{id_user}")
+    public RegisResponse<User> updateLog(@PathVariable ("id_user") Integer idUser,@RequestBody User user){
+        RegisResponse<User> responses = new RegisResponse<>();
+        Optional<User> optional = loginUserRepository.findById(idUser);
         if(optional.isPresent()){
-            serviceAdminUser.updateProfileAdmin(admin);
+            serviceAdminUser.updateProfileUser(idUser,user);
             responses.setMessages("Data berhasil di update");
         } else {
-            responses.setMessages("Error. Data tidak dapat di update");
+            responses.setMessages("Error. Data tidak ditemukan");
         }
         return responses;
->>>>>>> 2ed540c3c6164970d7ac50392b3e8b22a3224dec
     }
 
 
 //    @PutMapping({"/{id_user}"})
 //    public ResponseEntity<User> updateLog(@PathVariable("id_user") Integer idUser, @RequestBody User user){
-////        RegisResponse<User> responses = new RegisResponse<>();
-////        Optional<User> optional = loginUserRepository.findById(user.getIdUser());
-////        if(optional.isPresent()){
+//        RegisResponse<User> responses = new RegisResponse<>();
+//        Optional<User> optional = loginUserRepository.findById(idUser);
+//        if(optional.isPresent()){
 //            serviceAdminUser.updateProfileUser(idUser, user);
-////            responses.setMessages("Data berhasil di update");
-////        } else {
-////            responses.setMessages("Error. Data tidak dapat di update");
-////        }
-//        return new ResponseEntity<>(serviceAdminUser.getPembById(idUser), HttpStatus.OK);
+//            responses.setMessages("Data berhasil di update");
+//        } else {
+//            responses.setMessages("Error. Data tidak dapat di update");
+//        }
+//        return new ResponseEntity<>(serviceAdminUser.getPemById(idUser), HttpStatus.OK);
 //    }
 
     public UserDto convertEntityToDtoUs(User entity){
