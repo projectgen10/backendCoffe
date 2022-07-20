@@ -5,8 +5,8 @@ public class PembayaranGabunganDto {
     private String nama;
     private String namaMenu;
     private String namaJenis;
-    private String qty;
-    private String price;
+    private Integer qty;
+    private Double price;
 
     public String getNama() {
         return nama;
@@ -32,19 +32,19 @@ public class PembayaranGabunganDto {
         this.namaJenis = namaJenis;
     }
 
-    public String getQty() {
+    public Integer getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(Integer qty) {
         this.qty = qty;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

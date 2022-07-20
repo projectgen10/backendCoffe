@@ -40,11 +40,11 @@ public class MenuDto {
         this.idMenu = idMenu;
     }
 
-    public Integer getNamaJenis() {
-        return namaJenis;
-    }
-
-    public void setNamaJenis(Integer namaJenis) {
-        this.namaJenis = namaJenis;
-    }
+//    public Integer getNamaJenis() {
+//        return namaJenis;
+//    }
+//
+//    public void setNamaJenis(Integer namaJenis) {
+//        this.namaJenis = namaJenis;
+//    }
 }
