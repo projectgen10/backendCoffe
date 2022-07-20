@@ -107,7 +107,7 @@ public class ProfileController {
             serviceAdminUser.updateProfileAdmin(admin);
             responses.setMessages("Data berhasil di update");
         } else {
-            responses.setMessages("Error. Data tidak dapat di update");
+            responses.setMessages("Error. Data tidak ditemukan");
         }
         return responses;
 >>>>>>> 2ed540c3c6164970d7ac50392b3e8b22a3224dec
