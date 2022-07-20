@@ -2,17 +2,16 @@ package com.example.coffe.controller;
 
 
 import com.example.coffe.model.dto.AdminDto;
+import com.example.coffe.model.dto.DefaultResponse;
 import com.example.coffe.model.dto.RegisResponse;
 import com.example.coffe.model.dto.UserDto;
 import com.example.coffe.model.entity.Admin;
 import com.example.coffe.model.entity.User;
 import com.example.coffe.repository.LoginAdminRepository;
 import com.example.coffe.repository.LoginUserRepository;
+import com.example.coffe.service.ServiceAdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,9 @@ public class ProfileController {
 
     @Autowired
     private LoginUserRepository loginUserRepository;
+
+    @Autowired
+    ServiceAdminUser serviceAdminUser;
 
     @GetMapping("/viewUser")
     public List<UserDto> getListUser(){
@@ -73,16 +75,18 @@ public class ProfileController {
         return responses;
     }
 
-//    @PostMapping("/update")
-//    public DefaultResponses<LoginDto> updateLog(@RequestBody LoginDto loginDto){
-//        RegisterCoffee registerCoffee = convertDtoToEntity(loginDto);
-//        DefaultResponses<LoginDto> responses = new DefaultResponses<>();
-//        Optional<RegisterCoffee> optional = loginRepository.findById(loginDto.getIdUser());
-//        if(optional.isPresent()){
-//            RegisterCoffee dto = optional.get();
-//            dto.getNama()
-//        }
-//    }
+    @PutMapping("/updateus/{idUser}")
+    public RegisResponse<User> updateLog(@PathVariable Integer idUser, @RequestBody User user){
+        RegisResponse<User> responses = new RegisResponse<>();
+        Optional<User> optional = loginUserRepository.findById(user.getIdUser());
+        if(optional.isPresent()){
+            serviceAdminUser.updateProfileUser(idUser, user);
+            responses.setMessages("Data berhasil di update");
+        } else {
+            responses.setMessages("Error. Data tidak dapat di update");
+        }
+        return responses;
+    }
 
     public UserDto convertEntityToDtoUs(User entity){
         UserDto dto = new UserDto();
