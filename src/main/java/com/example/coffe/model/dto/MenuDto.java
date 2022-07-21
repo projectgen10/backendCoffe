@@ -3,8 +3,8 @@ package com.example.coffe.model.dto;
 public class MenuDto {
 
     private Integer idMenu;
-    private Integer idJenis;
     private String namaMenu;
+    private String namaJenis;
     private Integer stock;
     private Double harga;
 
@@ -40,11 +40,11 @@ public class MenuDto {
         this.idMenu = idMenu;
     }
 
-    public Integer getIdJenis() {
-        return idJenis;
+    public String getNamaJenis() {
+        return namaJenis;
     }
 
-    public void setIdJenis(Integer idJenis) {
-        this.idJenis = idJenis;
+    public void setNamaJenis(String namaJenis) {
+        this.namaJenis = namaJenis;
     }
 }

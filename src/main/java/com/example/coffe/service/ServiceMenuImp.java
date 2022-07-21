@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceM implements ServiceMenu {
+public class ServiceMenuImp implements ServiceMenu {
 
     @Autowired
     MenuRepository menuRepository;

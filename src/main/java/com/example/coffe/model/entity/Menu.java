@@ -21,14 +21,6 @@ public class Menu {
     @Column(name = "harga")
     private Double harga;
 
-    @OneToMany
-    @JoinColumn (name = "id_jenis", insertable = false, updatable = false)
-    private List<Jenis> jenis;
-
-    public Jenis getJenis(){
-        return jenis;
-    }
-
     public void setJenis(Jenis jenis){
         this.jenis = jenis;
     }
@@ -72,4 +64,11 @@ public class Menu {
     public void setHarga(Double harga) {
         this.harga = harga;
     }
+
+    @OneToMany
+    @JoinColumn (name = "id_jenis", insertable = false, updatable = false)
+    private List<Jenis> jenis;
+
+    public Jenis getJenis(){ return jenis; }
+
 }
