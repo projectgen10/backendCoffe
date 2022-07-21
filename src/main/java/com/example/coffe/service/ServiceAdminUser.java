@@ -16,14 +16,8 @@ public class ServiceAdminUser implements ServiceProfile{
     @Autowired
     LoginAdminRepository loginAdminRepository;
 
-
     @Override
-    public User getPemById(Integer idUser) {
-        return loginUserRepository.findById(idUser).get();
-    }
-
-    @Override
-    public void updateProfileUser(Integer idUser, User user) {
+    public void updateProfileUser(User user) {
         User user1 = loginUserRepository.findById(user.getIdUser()).get();
         user1.setPass(user.getPass());
         user1.setNama(user.getNama());
@@ -33,7 +27,7 @@ public class ServiceAdminUser implements ServiceProfile{
     }
 
     @Override
-    public void updateProfileAdmin(Integer idAmin, Admin admin) {
+    public void updateProfileAdmin(Admin admin) {
         Admin admin1 = loginAdminRepository.findById(admin.getIdAdmin()).get();
         admin1.setPass(admin.getPass());
         admin1.setNoTelp(admin.getNoTelp());
