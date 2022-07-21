@@ -1,8 +1,5 @@
 package com.example.coffe.model.entity;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,10 +17,6 @@ public class Menu {
     private Integer stock;
     @Column(name = "harga")
     private Double harga;
-
-    public void setJenis(Jenis jenis){
-        this.jenis = jenis;
-    }
 
     public Integer getIdMenu() {
         return idMenu;
@@ -70,5 +63,4 @@ public class Menu {
     private List<Jenis> jenis;
 
     public Jenis getJenis(){ return jenis; }
-
 }
