@@ -2,18 +2,14 @@ package com.example.coffe.controller;
 
 
 import com.example.coffe.model.dto.AdminDto;
-import com.example.coffe.model.dto.DefaultResponse;
 import com.example.coffe.model.dto.RegisResponse;
 import com.example.coffe.model.dto.UserDto;
 import com.example.coffe.model.entity.Admin;
-import com.example.coffe.model.entity.Pembayaran;
 import com.example.coffe.model.entity.User;
 import com.example.coffe.repository.LoginAdminRepository;
 import com.example.coffe.repository.LoginUserRepository;
 import com.example.coffe.service.ServiceAdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
