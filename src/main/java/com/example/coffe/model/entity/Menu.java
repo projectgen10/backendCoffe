@@ -61,6 +61,4 @@ public class Menu {
     @OneToMany
     @JoinColumn (name = "id_jenis", insertable = false, updatable = false)
     private List<Jenis> jenis;
-
-    public Jenis getJenis(){ return jenis; }
 }
