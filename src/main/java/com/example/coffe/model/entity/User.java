@@ -15,6 +15,12 @@ public class User {
     private String alamat;
     private String nama;
 
+    private Integer idRole;
+
+    @OneToOne
+    @JoinColumn(name = "idRole", insertable = false, updatable = false)
+    private Roles roles;
+
     public Integer getIdUser() {
         return idUser;
     }
@@ -54,4 +60,5 @@ public class User {
     public void setNama(String nama) {
         this.nama = nama;
     }
+
 }

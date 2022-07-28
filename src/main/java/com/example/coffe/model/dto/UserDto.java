@@ -7,6 +7,16 @@ public class UserDto {
     private String alamat;
     private String nama;
 
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Integer getIdUser() {
         return idUser;
     }

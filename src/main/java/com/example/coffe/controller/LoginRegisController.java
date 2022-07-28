@@ -1,10 +1,10 @@
 package com.example.coffe.controller;
 
 import com.example.coffe.model.dto.*;
-import com.example.coffe.model.entity.Admin;
+import com.example.coffe.model.entity.Roles;
 import com.example.coffe.model.entity.User;
-import com.example.coffe.repository.LoginAdminRepository;
 import com.example.coffe.repository.LoginUserRepository;
+import com.example.coffe.repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +15,10 @@ import java.util.Optional;
 public class LoginRegisController {
 
     @Autowired
-    private LoginAdminRepository loginAdminRepository;
+    private LoginUserRepository loginUserRepository;
 
     @Autowired
-    private LoginUserRepository loginUserRepository;
+    private RolesRepository rolesRepository;
 
     @PostMapping("/user")
     public DefaultResponse login(@RequestBody LoginUserDto loginUserDto){
@@ -36,29 +36,17 @@ public class LoginRegisController {
 
     }
 
-    @PostMapping("/admin")
-    public DefaultResponse login(@RequestBody LoginAdminDto loginAdminDto){
-        DefaultResponse df = new DefaultResponse();
-        Optional<Admin> optionalAdmin = loginAdminRepository.findByNoTelpAndPass(loginAdminDto.getNoTelp(), loginAdminDto.getPass());
-
-        if(optionalAdmin.isPresent()){
-            df.setStatus(Boolean.TRUE);
-            df.setMessage("Login Berhasil");
-        } else {
-            df.setStatus(Boolean.FALSE);
-            df.setMessage("Silahkan Register Terlebih Dahulu");
-        }
-        return df;
-
-    }
     @PostMapping("/reguser")
     public RegisResponse<UserDto> regisUser(@RequestBody UserDto userDto){
         User user = convertDtoEnUser(userDto);
         RegisResponse<UserDto> responses = new RegisResponse<>();
+        Roles roles = new Roles();
         Optional<User> optional = loginUserRepository.findByNoTelpAndPass(userDto.getNoTelp(), userDto.getPass());
         if(optional.isPresent()){
             responses.setMessages("Error, Data Sudah Tersedia. Silahkan login");
         } else {
+            roles.setRole(userDto.getRole());
+            rolesRepository.save(roles);
             loginUserRepository.save(user);
             responses.setMessages("Berhasil Register");
             responses.setData(userDto);
@@ -66,42 +54,14 @@ public class LoginRegisController {
         return responses;
     }
 
-    @PostMapping("/regadmin")
-    public RegisResponse<AdminDto> regisAdmin(@RequestBody AdminDto adminDto){
-        Admin admin = convertDtoEnAdmin(adminDto);
-        RegisResponse<AdminDto> responses = new RegisResponse<>();
-        Optional<Admin> optional = loginAdminRepository.findByNoTelpAndPass(adminDto.getNoTelp(), adminDto.getPass());
-        if(optional.isPresent()){
-            responses.setMessages("Error, Data Sudah Tersedia. Silahkan login");
-        } else {
-            loginAdminRepository.save(admin);
-            responses.setMessages("Berhasil Register");
-            responses.setData(adminDto);
-        }
-        return responses;
-    }
-
-    @PostMapping("/deluser")
+    @DeleteMapping("/deluser")
     public RegisResponse<UserDto> delUser(@RequestBody UserDto userDto){
         User user = convertDtoEnUser(userDto);
         RegisResponse<UserDto> responses = new RegisResponse<>();
         Optional<User> optional = loginUserRepository.findById(userDto.getIdUser());
         if(optional.isPresent()){
             loginUserRepository.delete(user);
-            responses.setMessages("Data berhasil dihapus");
-        } else {
-            responses.setMessages("Informasi salah. Data tidak dapat dihapus");
-        }
-        return responses;
-    }
-
-    @PostMapping("/deladmin")
-    public RegisResponse<AdminDto> delAdmin(@RequestBody AdminDto adminDto){
-        Admin admin = convertDtoEnAdmin(adminDto);
-        RegisResponse<AdminDto> responses = new RegisResponse<>();
-        Optional<Admin> optional = loginAdminRepository.findById(adminDto.getIdAdmin());
-        if(optional.isPresent()){
-            loginAdminRepository.delete(admin);
+            //gimana caranya bisa ikut delete roles disini? :D
             responses.setMessages("Data berhasil dihapus");
         } else {
             responses.setMessages("Informasi salah. Data tidak dapat dihapus");
@@ -117,16 +77,6 @@ public class LoginRegisController {
         user.setNoTelp(dto.getNoTelp());
         user.setPass(dto.getPass());
         return user;
-    }
-
-    public Admin convertDtoEnAdmin(AdminDto dto){
-        Admin admin = new Admin();
-        admin.setIdAdmin(dto.getIdAdmin());
-        admin.setAlamat(dto.getAlamat());
-        admin.setNama(dto.getNama());
-        admin.setNoTelp(dto.getNoTelp());
-        admin.setPass(dto.getPass());
-        return admin;
     }
 
 
