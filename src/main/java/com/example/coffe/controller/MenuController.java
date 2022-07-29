@@ -133,6 +133,13 @@ public class MenuController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    public Jenis convertDtoToEntity(JenisDto dto) {
+        Jenis entity = new Jenis();
+        entity.setIdJenis(dto.getIdJenis());
+        entity.setNamaJenis(dto.getNamaJenis());
+        return entity;
+    }
+
     public Menu convertDtoToEntity(MenuDto dto) {
         Menu entity = new Menu();
         entity.setIdMenu(dto.getIdMenu());
@@ -152,12 +159,5 @@ public class MenuController {
         dto.setStock(entity.getStock());
         dto.setHarga(entity.getHarga());
         return dto;
-    }
-
-    public Jenis convertDtoToEntity(JenisDto dto) {
-        Jenis entity = new Jenis();
-        entity.setIdJenis(dto.getIdJenis());
-        entity.setNamaJenis(dto.getNamaJenis());
-        return entity;
     }
 }
