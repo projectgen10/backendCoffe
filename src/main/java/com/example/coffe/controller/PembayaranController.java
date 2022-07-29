@@ -20,17 +20,19 @@ import java.util.Optional;
 @RequestMapping("/pembayaran")
 public class PembayaranController {
 
-    private final DetailPembayaranRepository detailPembayaranRepository;
-    private final PembayaranRepository pembayaranRepository;
 
+    @Autowired
+    private DetailPembayaranRepository detailPembayaranRepository;
+    @Autowired
+    private PembayaranRepository pembayaranRepository;
     @Autowired
     ServicePembayaran servicePembayaran;
 
-    public PembayaranController(DetailPembayaranRepository detailPembayaranRepository, PembayaranRepository pembayaranRepository) {
-        this.detailPembayaranRepository = detailPembayaranRepository;
-        this.pembayaranRepository = pembayaranRepository;
-
-    }
+//    public PembayaranController(DetailPembayaranRepository detailPembayaranRepository, PembayaranRepository pembayaranRepository) {
+//        this.detailPembayaranRepository = detailPembayaranRepository;
+//        this.pembayaranRepository = pembayaranRepository;
+//
+//    }
 
     //tambah data lewat service dan auto id
     @PostMapping("/tambah")
@@ -70,7 +72,7 @@ public class PembayaranController {
         return dto;
     }
 
-    @GetMapping("pembayaran")
+    @GetMapping("/pembayaran")
     public List<PembayaranDto> getListPembayaran() {
         List<PembayaranDto> list = new ArrayList();
         for (Pembayaran pembayaran : pembayaranRepository.findAll()) {

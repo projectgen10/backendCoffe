@@ -10,22 +10,17 @@ public class Detail_Pembayaran {
 
     @Column(name = "id_detail_pembayaran")
     private Integer id;
-
     @Column(name = "id_pembayaran")
     private Integer id_pemb;
-
     @OneToOne
     @JoinColumn(name = "id_pemb", insertable = false, updatable = false)
     private Pembayaran pembayaran;
     @Column(name = "id_user")
     private Integer idUser;
-
     @OneToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
     private User user;
-//  join user
 
-//    join menu
     @Column(name = "id_menu")
     private Integer idMenu;
 
@@ -33,7 +28,6 @@ public class Detail_Pembayaran {
     @JoinColumn(name = "id_menu", insertable = false, updatable = false)
     private Menu menu;
 
-//  join jenis
     @Column(name = "id_jenis")
     private Integer idJenis;
 

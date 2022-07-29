@@ -3,14 +3,16 @@ package com.example.coffe.service;
 import com.example.coffe.model.entity.Pembayaran;
 import com.example.coffe.repository.PembayaranRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
-public class Service implements ServicePembayaran{
+@Service
+public class ServicePembayaranImpl implements ServicePembayaran{
     @Autowired
     PembayaranRepository pembayaranRepository;
 
     @Override
     public Pembayaran getPembById(Integer id_pemb) {
+
         return pembayaranRepository.findById(id_pemb).get();
     }
 

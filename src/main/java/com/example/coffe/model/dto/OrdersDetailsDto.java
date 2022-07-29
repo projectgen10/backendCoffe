@@ -1,16 +1,12 @@
 package com.example.coffe.model.dto;
 
-public class PembayaranGabunganDto {
+public class OrdersDetailsDto {
 
     private String nama;
     private String namaMenu;
     private String namaJenis;
     private Integer qty;
-    private Double price;
-
-    //kurang private Double harga;
-
-
+    private Double harga;
 
     public String getNama() {
         return nama;
@@ -44,11 +40,12 @@ public class PembayaranGabunganDto {
         this.qty = qty;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getHarga()
+    {
+        return harga;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setHarga(Double harga) {
+        this.harga = harga;
     }
 }
