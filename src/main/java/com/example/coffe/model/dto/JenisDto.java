@@ -2,7 +2,7 @@ package com.example.coffe.model.dto;
 
 public class JenisDto {
     private String namaJenis;
-    private String gambar;
+    private String idJenis;
 
     public String getNamaJenis() {
         return namaJenis;
@@ -12,11 +12,11 @@ public class JenisDto {
         this.namaJenis = namaJenis;
     }
 
-    public String getGambar() {
-        return gambar;
+    public String getIdJenis() {
+        return idJenis;
     }
 
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
+    public void setIdJenis(String idJenis) {
+        this.idJenis = idJenis;
     }
 }

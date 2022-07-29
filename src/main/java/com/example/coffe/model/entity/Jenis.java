@@ -7,17 +7,17 @@ import javax.persistence.*;
 public class Jenis {
     @Id
     @Column(name = "id_jenis")
-    private Integer idJenis;
+    private String idJenis;
     @Column(name = "nama_jenis")
     private String namaJenis;
     @Column(name = "gambar")
     private String gambar;
 
-    public Integer getIdJenis() {
+    public String getIdJenis() {
         return idJenis;
     }
 
-    public void setIdJenis(Integer idJenis) {
+    public void setIdJenis(String idJenis) {
         this.idJenis = idJenis;
     }
 
@@ -36,8 +36,4 @@ public class Jenis {
     public void setGambar(String gambar) {
         this.gambar = gambar;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "idMenu")
-    private Menu menu;
 }

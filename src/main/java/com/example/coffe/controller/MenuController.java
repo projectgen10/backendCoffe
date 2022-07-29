@@ -1,18 +1,24 @@
 package com.example.coffe.controller;
 
-import com.example.coffe.model.dto.DefaultResponse;
-import com.example.coffe.model.dto.MenuDto;
+import com.example.coffe.model.dto.*;
+import com.example.coffe.model.entity.Jenis;
 import com.example.coffe.model.entity.Menu;
+import com.example.coffe.repository.JenisRepository;
 import com.example.coffe.repository.MenuRepository;
 import com.example.coffe.service.ServiceMenu;
+import com.example.coffe.service.ServiceMenuImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/menu")
@@ -20,9 +26,12 @@ public class MenuController {
 
     @Autowired
     private MenuRepository menuRepository;
-
+    @Autowired
+    private JenisRepository jenisRepository;
     @Autowired
     ServiceMenu serviceMenu;
+    @Autowired
+    ServiceMenuImp serviceMenuImp;
 
     @PostMapping("/pilihan")
     public DefaultResponse pilihan(@RequestBody MenuDto menuDto) {
@@ -40,7 +49,7 @@ public class MenuController {
     }
 
     @GetMapping({"/byid/{idMenu}"})
-    public DefaultResponse getByidMenu(@PathVariable Integer idMenu) {
+    public DefaultResponse getByidMenu(@PathVariable String idMenu) {
 
         DefaultResponse df = new DefaultResponse();
         Optional<Menu> menuOps = menuRepository.findById(idMenu);
@@ -55,17 +64,17 @@ public class MenuController {
         return df;
     }
 
-    @PostMapping("/save")
-    public DefaultResponse<MenuDto> saveMenu(@RequestBody MenuDto menuDto) {
-        Menu menu = convertDtoToEntity(menuDto);
-        DefaultResponse<MenuDto> response = new DefaultResponse<>();
-        Optional<Menu> optional = menuRepository.findById(menuDto.getIdMenu());
+    @PostMapping("/savejenis")
+    public DefaultResponse<JenisDto> saveJenis(@RequestBody JenisDto jenisDto) {
+        Jenis jenis = convertDtoToEntity(jenisDto);
+        DefaultResponse<JenisDto> response = new DefaultResponse<>();
+        Optional<Jenis> optional = jenisRepository.findById(jenisDto.getIdJenis());
         if (optional.isPresent()) {
             response.setMessage("ERROR, DATA MENU TELAH TERSEDIA");
         } else {
-            menuRepository.save(menu);
+            jenisRepository.save(jenis);
             response.setMessage("DATA MENU BERHASIL TERSIMPAN");
-            response.setData(menuDto);
+            response.setData(jenisDto);
         }
         return response;
     }
@@ -79,14 +88,47 @@ public class MenuController {
         return list;
     }
 
-    @PutMapping({"/{idMenu}"})
-    public ResponseEntity<Menu> updateMenu(@PathVariable("idMenu") Integer idMenu, @RequestBody Menu menu) {
+    @PostMapping("/save")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, Menu menu) {
+        String message = "";
+        String data = "";
+        try {
+            serviceMenuImp.store(file, menu);
+            data = "BERHASIL";
+            message = "FILE BERHASI DIUPLOAD" + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message, data));
+        } catch (Exception e) {
+            data = "GAGAL";
+            message = "FILE TIDAK BERHASIL DIUPLOAD" + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message, data));
+        }
+    }
+
+    @GetMapping("/files")
+    public ResponseEntity<List<ResponseFile>> getListFile() {
+        List<ResponseFile> files = serviceMenuImp.getAllFiles().map(dbMenu -> {
+            String fileDownloadUrl = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/files/").path(dbMenu.getIdMenu()).toUriString();
+            return new ResponseFile(dbMenu.getNamaFile(), fileDownloadUrl, dbMenu.getType(), dbMenu.getData().length);
+        }).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(files);
+    }
+
+    @GetMapping({"/files/{idMenu}"})
+    public ResponseEntity<byte[]> getFile(@PathVariable String idMenu) {
+        Menu menu = serviceMenuImp.getFile(idMenu);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
+                + menu.getNamaMenu() + "\"").body(menu.getData());
+    }
+
+    @PutMapping({"/upload/{idMenu}"})
+    public ResponseEntity<Menu> updateMenu(@PathVariable("idMenu") String idMenu, @RequestBody Menu menu) {
         serviceMenu.updateMenu(idMenu, menu);
         return new ResponseEntity<>(serviceMenu.getMenuByidMenu(idMenu), HttpStatus.OK);
     }
 
     @DeleteMapping({"/{idMenu}"})
-    public ResponseEntity<Menu> deleteMenu(@PathVariable("idMenu") Integer idMenu) {
+    public ResponseEntity<Menu> deleteMenu(@PathVariable("idMenu") String idMenu) {
         serviceMenu.deleteMenu(idMenu);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -103,9 +145,19 @@ public class MenuController {
     public MenuDto convertEntityToDto(Menu entity) {
         MenuDto dto = new MenuDto();
         dto.setIdMenu(entity.getIdMenu());
+        dto.setNamaJenis(entity.getJenis().getNamaJenis());
+        dto.setType(entity.getType());
+        dto.setName(entity.getNamaFile());
         dto.setNamaMenu(entity.getNamaMenu());
         dto.setStock(entity.getStock());
         dto.setHarga(entity.getHarga());
         return dto;
+    }
+
+    public Jenis convertDtoToEntity(JenisDto dto) {
+        Jenis entity = new Jenis();
+        entity.setIdJenis(dto.getIdJenis());
+        entity.setNamaJenis(dto.getNamaJenis());
+        return entity;
     }
 }

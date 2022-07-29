@@ -2,11 +2,27 @@ package com.example.coffe.model.dto;
 
 public class MenuDto {
 
-    private Integer idMenu;
+    private String idMenu;
     private String namaMenu;
     private String namaJenis;
     private Integer stock;
     private Double harga;
+    private String name;
+    private String type;
+    private long size;
+
+    public MenuDto (String namaMenu, String namaJenis, Integer stock, Double harga, String name, String type, long size) {
+        this.namaMenu = namaMenu;
+        this.namaJenis = namaJenis;
+        this.stock = stock;
+        this.harga = harga;
+        this.name = name;
+        this.type = type;
+        this.size = size;
+    }
+    public MenuDto() {
+
+    }
 
     public String getNamaMenu() {
         return namaMenu;
@@ -32,11 +48,11 @@ public class MenuDto {
         this.harga = harga;
     }
 
-    public Integer getIdMenu() {
+    public String getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(Integer idMenu) {
+    public void setIdMenu(String idMenu) {
         this.idMenu = idMenu;
     }
 
@@ -46,5 +62,29 @@ public class MenuDto {
 
     public void setNamaJenis(String namaJenis) {
         this.namaJenis = namaJenis;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 }
