@@ -32,8 +32,7 @@ public class ServiceMenuImp implements ServiceMenu {
     }
 
     @Override
-    public void deleteMenu(String idMenu) {
-        menuRepository.deleteById(idMenu);
+    public void deleteMenu(String idMenu) { menuRepository.deleteById(idMenu);
     }
 
     public Menu store(MultipartFile file, Menu menu) throws IOException {

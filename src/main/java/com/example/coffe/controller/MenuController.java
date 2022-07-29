@@ -36,8 +36,8 @@ public class MenuController {
     @PostMapping("/pilihan")
     public DefaultResponse pilihan(@RequestBody MenuDto menuDto) {
 
-        Optional<Menu> optionalMenu = menuRepository.findById(menuDto.getIdMenu());
         DefaultResponse df = new DefaultResponse();
+        Optional<Menu> optionalMenu = menuRepository.findById(menuDto.getIdMenu());
         if (optionalMenu.isPresent()) {
             df.setStatus(Boolean.TRUE);
             df.setMessage("MENU YANG ANDA PILIH TELAH TERSIMPAN");
