@@ -30,10 +30,10 @@ public class ServiceOrderImp {
     public float getCartAmount(List<ShoppingCart> shoppingCartList) {
         float totalCartAmount = 0;
         float singleCartAmount = 0;
-        int availableQuantity = 0;
+        Integer availableQuantity = 0;
 
         for (ShoppingCart cart : shoppingCartList){
-            int productId = cart.getProductId();
+            Integer productId = cart.getProductId();
             Optional<Menu> menu = menuRepository.findById(productId);
             if (menu.isPresent()){
                 Menu menu1 = menu.get();

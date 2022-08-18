@@ -19,14 +19,14 @@ public class ShoppingCart {
     public ShoppingCart() {
     }
 
-    public ShoppingCart(int productId, String productName, int quantity, float amount) {
+    public ShoppingCart(Integer productId, String productName, Integer quantity, Float amount) {
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.amount = amount;
     }
 
-    public ShoppingCart(int productId, int quantity) {
+    public ShoppingCart(Integer productId, Integer quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }
