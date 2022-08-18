@@ -1,7 +1,6 @@
 # backendCoffe
 
 # Ini halaman yang nnti akan kita pakai di FE nanti
-# mungkin belum lengkap tapi kita coba lengkapin guys.. semangat 45 :)
 
 * Halaman Login & Regist *
 # https://coffeetav.herokuapp.com/viewUser
