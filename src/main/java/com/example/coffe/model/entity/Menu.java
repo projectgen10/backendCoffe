@@ -3,16 +3,16 @@ package com.example.coffe.model.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_menu")
 public class Menu {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_menu")
-    private String idMenu;
+    private Integer idMenu;
     @Column(name = "nama_menu")
     private String namaMenu;
     @Column(name = "id_jenis")
@@ -20,7 +20,7 @@ public class Menu {
     @Column(name = "stock")
     private Integer stock;
     @Column(name = "harga")
-    private Double harga;
+    private Float harga;
     @Column(name = "nama_file")
     private String namaFile;
     @Column(name = "type")
@@ -65,11 +65,11 @@ public class Menu {
         this.type = type;
     }
 
-    public String getIdMenu() {
+    public Integer getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(String idMenu) {
+    public void setIdMenu(Integer idMenu) {
         this.idMenu = idMenu;
     }
 
@@ -97,16 +97,16 @@ public class Menu {
         this.stock = stock;
     }
 
-    public Double getHarga() {
+    public Float getHarga() {
         return harga;
     }
 
-    public void setHarga(Double harga) {
+    public void setHarga(Float harga) {
         this.harga = harga;
     }
 
     @OneToOne
-    @JoinColumn(name = "idJenis", insertable = false, updatable = false)
+    @JoinColumn(name = "id_Jenis", insertable = false, updatable = false)
     private Jenis jenis;
 
     public Jenis getJenis() {
@@ -115,5 +115,20 @@ public class Menu {
 
     public void setJenis(Jenis jenis) {
         this.jenis = jenis;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "idMenu='" + idMenu + '\'' +
+                ", namaMenu='" + namaMenu + '\'' +
+                ", idJenis='" + idJenis + '\'' +
+                ", stock=" + stock +
+                ", harga=" + harga +
+                ", namaFile='" + namaFile + '\'' +
+                ", type='" + type + '\'' +
+                ", data=" + Arrays.toString(data) +
+                ", jenis=" + jenis +
+                '}';
     }
 }

@@ -2,16 +2,16 @@ package com.example.coffe.model.dto;
 
 public class MenuDto {
 
-    private String idMenu;
+    private Integer idMenu;
     private String namaMenu;
     private String namaJenis;
     private Integer stock;
-    private Double harga;
+    private Float harga;
     private String name;
     private String type;
     private long size;
 
-    public MenuDto (String namaMenu, String namaJenis, Integer stock, Double harga, String name, String type, long size) {
+    public MenuDto (String namaMenu, String namaJenis, Integer stock, Float harga, String name, String type, long size) {
         this.namaMenu = namaMenu;
         this.namaJenis = namaJenis;
         this.stock = stock;
@@ -40,19 +40,19 @@ public class MenuDto {
         this.stock = stock;
     }
 
-    public Double getHarga() {
+    public Float getHarga() {
         return harga;
     }
 
-    public void setHarga(Double harga) {
+    public void setHarga(Float harga) {
         this.harga = harga;
     }
 
-    public String getIdMenu() {
+    public Integer getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(String idMenu) {
+    public void setIdMenu(Integer idMenu) {
         this.idMenu = idMenu;
     }
 

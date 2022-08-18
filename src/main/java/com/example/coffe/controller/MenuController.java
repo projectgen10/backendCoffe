@@ -49,7 +49,7 @@ public class MenuController {
     }
 
     @GetMapping({"/byid/{idMenu}"})
-    public DefaultResponse getByidMenu(@PathVariable String idMenu) {
+    public DefaultResponse getByidMenu(@PathVariable Integer idMenu) {
 
         DefaultResponse df = new DefaultResponse();
         Optional<Menu> menuOps = menuRepository.findById(idMenu);
@@ -108,27 +108,27 @@ public class MenuController {
     public ResponseEntity<List<ResponseFile>> getListFile() {
         List<ResponseFile> files = serviceMenuImp.getAllFiles().map(dbMenu -> {
             String fileDownloadUrl = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/files/").path(dbMenu.getIdMenu()).toUriString();
+                    .fromCurrentContextPath().path("/files/").path(dbMenu.getIdMenu().toString()).toUriString();
             return new ResponseFile(dbMenu.getNamaFile(), fileDownloadUrl, dbMenu.getType(), dbMenu.getData().length);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
     @GetMapping({"/files/{idMenu}"})
-    public ResponseEntity<byte[]> getFile(@PathVariable String idMenu) {
+    public ResponseEntity<byte[]> getFile(@PathVariable Integer idMenu) {
         Menu menu = serviceMenuImp.getFile(idMenu);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
                 + menu.getNamaMenu() + "\"").body(menu.getData());
     }
 
     @PutMapping({"/upload/{idMenu}"})
-    public ResponseEntity<Menu> updateMenu(@PathVariable("idMenu") String idMenu, @RequestBody Menu menu) {
+    public ResponseEntity<Menu> updateMenu(@PathVariable("idMenu") Integer idMenu, @RequestBody Menu menu) {
         serviceMenu.updateMenu(idMenu, menu);
         return new ResponseEntity<>(serviceMenu.getMenuByidMenu(idMenu), HttpStatus.OK);
     }
 
     @DeleteMapping({"/{idMenu}"})
-    public ResponseEntity<Menu> deleteMenu(@PathVariable("idMenu") String idMenu) {
+    public ResponseEntity<Menu> deleteMenu(@PathVariable("idMenu") Integer idMenu) {
         serviceMenu.deleteMenu(idMenu);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -145,7 +145,7 @@ public class MenuController {
         entity.setIdMenu(dto.getIdMenu());
         entity.setNamaMenu(dto.getNamaMenu());
         entity.setStock(dto.getStock());
-        entity.setHarga(dto.getHarga());
+        entity.setHarga(dto.getHarga().floatValue());
         return entity;
     }
 
