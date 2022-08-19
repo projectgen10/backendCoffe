@@ -5,13 +5,18 @@ import com.example.coffe.model.entity.Roles;
 import com.example.coffe.model.entity.User;
 import com.example.coffe.repository.LoginUserRepository;
 import com.example.coffe.repository.RolesRepository;
+import com.example.coffe.service.ServiceAdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/user")
 public class LoginRegisController {
 
     @Autowired
@@ -20,7 +25,10 @@ public class LoginRegisController {
     @Autowired
     private RolesRepository rolesRepository;
 
-    @PostMapping("/user")
+    @Autowired
+    private ServiceAdminUser serviceAdminUser;
+
+    @PostMapping("/login")
     public DefaultResponse login(@RequestBody LoginUserDto loginUserDto){
         DefaultResponse df = new DefaultResponse();
         Optional<User> optionalUser = loginUserRepository.findByNoTelpAndPass(loginUserDto.getNoTelp(), loginUserDto.getPass());
@@ -36,32 +44,45 @@ public class LoginRegisController {
 
     }
 
-    @PostMapping("/reguser")
-    public RegisResponse<UserDto> regisUser(@RequestBody UserDto userDto){
-        User user = convertDtoEnUser(userDto);
-        RegisResponse<UserDto> responses = new RegisResponse<>();
-        Roles roles = new Roles();
-        Optional<User> optional = loginUserRepository.findByNoTelpAndPass(userDto.getNoTelp(), userDto.getPass());
-        if(optional.isPresent()){
-            responses.setMessages("Error, Data Sudah Tersedia. Silahkan login");
+    @PostMapping("/logout")
+    public DefaultResponse logout(@RequestBody LoginUserDto loginUserDto){
+        DefaultResponse df = new DefaultResponse();
+        Optional<User> optionalUser = loginUserRepository.findByNoTelpAndPass(loginUserDto.getNoTelp(), loginUserDto.getPass());
+        if(optionalUser.isPresent()){
+            df.setStatus(Boolean.TRUE);
+            df.setMessage("Logout Berhasil");
         } else {
-            roles.setRole(userDto.getRole());
-            rolesRepository.save(roles);
-            loginUserRepository.save(user);
-            responses.setMessages("Berhasil Register");
-            responses.setData(userDto);
+            df.setStatus(Boolean.FALSE);
+            df.setMessage("Error silahkan login terlebih dahulu");
         }
-        return responses;
+        return df;
+
+    }
+
+    // ini tambah multipart
+    @PostMapping("/reguser")
+    public ResponseEntity<Responses> regisUser(@RequestParam("file") MultipartFile file, User user, Roles roles){
+        String message = "";
+        try {
+            serviceAdminUser.register(file, user, roles);
+            message = "Registered successfully ";
+            return ResponseEntity.status(HttpStatus.OK).body(new Responses(message));
+        } catch (Exception e) {
+            message = "Could not register !";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new Responses(message));
+        }
     }
 
     @DeleteMapping("/deluser")
     public RegisResponse<UserDto> delUser(@RequestBody UserDto userDto){
         User user = convertDtoEnUser(userDto);
+        Roles roles = convertDtotoEnRole(userDto);
         RegisResponse<UserDto> responses = new RegisResponse<>();
         Optional<User> optional = loginUserRepository.findById(userDto.getIdUser());
-        if(optional.isPresent()){
+        Optional<Roles> optional1 = rolesRepository.findById(userDto.getIdRole());
+        if(optional.isPresent() && optional1.isPresent()){
             loginUserRepository.delete(user);
-            //gimana caranya bisa ikut delete roles disini? :D
+            rolesRepository.delete(roles);
             responses.setMessages("Data berhasil dihapus");
         } else {
             responses.setMessages("Informasi salah. Data tidak dapat dihapus");
@@ -78,4 +99,13 @@ public class LoginRegisController {
         user.setPass(dto.getPass());
         return user;
     }
+
+    public Roles convertDtotoEnRole(UserDto dto){
+        Roles roles = new Roles();
+        roles.setRole(dto.getRole());
+        roles.setIdRole(dto.getIdRole());
+        return roles;
+    }
+
+
 }

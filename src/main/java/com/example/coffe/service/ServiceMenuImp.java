@@ -27,7 +27,7 @@ public class ServiceMenuImp implements ServiceMenu {
         Menu menu1 = menuRepository.findById(idMenu).get();
         System.out.println(menu1);
         menu1.setNamaMenu(menu.getNamaMenu());
-        menu1.setIdJenis(menu.getIdJenis());
+//        menu1.setIdJenis(menu.getIdJenis());
         menu1.setStock(menu.getStock());
         menu1.setHarga(menu.getHarga());
         menuRepository.save(menu1);
@@ -41,7 +41,7 @@ public class ServiceMenuImp implements ServiceMenu {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Menu menu1 = new Menu(fileName, file.getContentType(), file.getBytes());
         menu1.setNamaMenu(menu.getNamaMenu());
-        menu1.setIdJenis(menu.getIdJenis());
+//        menu1.setIdJenis(menu.getIdJenis());
         menu1.setHarga(menu.getHarga());
         menu1.setStock(menu.getStock());
         return menuRepository.save(menu1);

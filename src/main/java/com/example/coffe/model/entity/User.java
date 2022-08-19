@@ -17,9 +17,25 @@ public class User {
 
     private Integer idRole;
 
+    private String namaFile;
+    private String type;
+
+    @Lob
+    private byte[] data;
+
     @OneToOne
     @JoinColumn(name = "idRole", insertable = false, updatable = false)
     private Roles roles;
+
+    public User(){
+
+    }
+
+    public User(String namaFile, String type, byte[] data) {
+        this.namaFile = namaFile;
+        this.type = type;
+        this.data = data;
+    }
 
     public Integer getIdUser() {
         return idUser;
@@ -61,4 +77,27 @@ public class User {
         this.nama = nama;
     }
 
+    public String getNamaFile() {
+        return namaFile;
+    }
+
+    public void setNamaFile(String namaFile) {
+        this.namaFile = namaFile;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
 }

@@ -9,6 +9,16 @@ public class UserDto {
 
     private String role;
 
+    private Integer idRole;
+
+    public Integer getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(Integer idRole) {
+        this.idRole = idRole;
+    }
+
     public String getRole() {
         return role;
     }
