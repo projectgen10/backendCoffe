@@ -33,4 +33,4 @@ contoh :
 
 }
 
-* https://coffeetav.herokuapp.com/orders/getAllOrders/1 // mengambil data orders by id (put)
+* https://coffeetav.herokuapp.com/orders/getAllOrders/1 // mengambil data orders by id (get)
