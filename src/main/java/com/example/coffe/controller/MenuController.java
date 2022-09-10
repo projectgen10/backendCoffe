@@ -89,6 +89,16 @@ public class MenuController {
         return list;
     }
 
+    @GetMapping("/listjenis")
+    public List<JenisDto> getListJenis() {
+        List<JenisDto> list = new ArrayList();
+        for (Jenis m : jenisRepository.findAll()) {
+            list.add(convertEntityToDtoJenis(m));
+
+        }
+        return list;
+    }
+
     @PostMapping("/save")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, Menu menu) {
         String message = "";
@@ -159,6 +169,13 @@ public class MenuController {
         dto.setNamaMenu(entity.getNamaMenu());
         dto.setStock(entity.getStock());
         dto.setHarga(entity.getHarga());
+        return dto;
+    }
+
+    public JenisDto convertEntityToDtoJenis(Jenis entity) {
+        JenisDto dto = new JenisDto();
+        dto.setIdJenis(entity.getIdJenis());
+        dto.setNamaJenis(entity.getNamaJenis());
         return dto;
     }
 }
