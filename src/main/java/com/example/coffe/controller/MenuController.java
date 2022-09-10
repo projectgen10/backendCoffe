@@ -89,6 +89,17 @@ public class MenuController {
         return list;
     }
 
+    @GetMapping("/listmenu")
+    public List<MenuDto> getListMenuu() {
+        List<MenuDto> list = new ArrayList();
+        for (Menu m : menuRepository.findAll()) {
+            for(Jenis j : jenisRepository.findAll()){
+                list.add(convertEntityToDtoMenu(m, j));
+            }
+        }
+        return list;
+    }
+
     @GetMapping("/listjenis")
     public List<JenisDto> getListJenis() {
         List<JenisDto> list = new ArrayList();
@@ -169,6 +180,19 @@ public class MenuController {
         dto.setNamaMenu(entity.getNamaMenu());
         dto.setStock(entity.getStock());
         dto.setHarga(entity.getHarga());
+        return dto;
+    }
+
+    public MenuDto convertEntityToDtoMenu(Menu entity, Jenis en) {
+        MenuDto dto = new MenuDto();
+        dto.setIdMenu(entity.getIdMenu());
+        dto.setType(entity.getType());
+        dto.setNamaJenis(entity.getIdJenis());
+        dto.setName(entity.getNamaFile());
+        dto.setNamaMenu(entity.getNamaMenu());
+        dto.setStock(entity.getStock());
+        dto.setHarga(entity.getHarga());
+        dto.setNamaJenis(en.getNamaJenis());
         return dto;
     }
 
