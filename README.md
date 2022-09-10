@@ -5,7 +5,7 @@
 
 * Halaman Menu 
 * https://coffeetav.herokuapp.com/menu/listjenis //list jenis (get)
-* https://coffeetav.herokuapp.com/menu/listmenuu //list menu (get)
+* https://coffeetav.herokuapp.com/menu/listmenu //list menu (get)
 * https://coffeetav.herokuapp.com/menu/savejenis //save jenis (post)
 * https://coffeetav.herokuapp.com/menu/save //save menu (post)
 * https://coffeetav.herokuapp.com/menu/upload/1 //update menu (put)
