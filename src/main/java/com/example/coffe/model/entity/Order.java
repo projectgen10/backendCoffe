@@ -62,13 +62,4 @@ public class Order {
         this.cartItems = cartItems;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", orderDescription='" + orderDescription + '\'' +
-                ", customer=" + customer +
-                ", cartItems=" + cartItems +
-                '}';
-    }
 }

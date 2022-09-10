@@ -9,16 +9,14 @@ public class MenuDto {
     private Float harga;
     private String name;
     private String type;
-    private long size;
 
-    public MenuDto (String namaMenu, String namaJenis, Integer stock, Float harga, String name, String type, long size) {
+    public MenuDto (String namaMenu, String namaJenis, Integer stock, Float harga, String name, String type) {
         this.namaMenu = namaMenu;
         this.namaJenis = namaJenis;
         this.stock = stock;
         this.harga = harga;
         this.name = name;
         this.type = type;
-        this.size = size;
     }
     public MenuDto() {
 
@@ -80,11 +78,4 @@ public class MenuDto {
         this.type = type;
     }
 
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
 }

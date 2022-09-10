@@ -15,8 +15,8 @@ public class Menu {
     private Integer idMenu;
     @Column(name = "nama_menu")
     private String namaMenu;
-//    @Column(name = "id_jenis")
-//    private String idJenis;
+    @Column(name = "id_jenis")
+    private String idJenis;
     @Column(name = "stock")
     private Integer stock;
     @Column(name = "harga")
@@ -81,13 +81,13 @@ public class Menu {
         this.namaMenu = namaMenu;
     }
 
-//    public String getIdJenis() {
-//        return idJenis;
-//    }
-//
-//    public void setIdJenis(String idJenis) {
-//        this.idJenis = idJenis;
-//    }
+    public String getIdJenis() {
+        return idJenis;
+    }
+
+    public void setIdJenis(String idJenis) {
+        this.idJenis = idJenis;
+    }
 
     public Integer getStock() {
         return stock;
@@ -117,18 +117,18 @@ public class Menu {
         this.jenis = jenis;
     }
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "idMenu='" + idMenu + '\'' +
-                ", namaMenu='" + namaMenu + '\'' +
-//                ", idJenis='" + idJenis + '\'' +
-                ", stock=" + stock +
-                ", harga=" + harga +
-                ", namaFile='" + namaFile + '\'' +
-                ", type='" + type + '\'' +
-                ", data=" + Arrays.toString(data) +
-                ", jenis=" + jenis +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Menu{" +
+//                "idMenu='" + idMenu + '\'' +
+//                ", namaMenu='" + namaMenu + '\'' +
+////                ", idJenis='" + idJenis + '\'' +
+//                ", stock=" + stock +
+//                ", harga=" + harga +
+//                ", namaFile='" + namaFile + '\'' +
+//                ", type='" + type + '\'' +
+//                ", data=" + Arrays.toString(data) +
+//                ", jenis=" + jenis +
+//                '}';
+//    }
 }

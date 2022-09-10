@@ -84,15 +84,9 @@ public class MenuController {
         List<MenuDto> list = new ArrayList();
         for (Menu m : menuRepository.findAll()) {
             list.add(convertEntityToDto(m));
+
         }
         return list;
-    }
-    @GetMapping("/listmenu")
-    public ResponseEntity<List<Menu>> getAllProducts() {
-
-        List<Menu> productList = serviceMenuImp.getAllProducts();
-
-        return ResponseEntity.ok(productList);
     }
 
     @PostMapping("/save")
@@ -160,6 +154,7 @@ public class MenuController {
         MenuDto dto = new MenuDto();
         dto.setIdMenu(entity.getIdMenu());
         dto.setType(entity.getType());
+        dto.setNamaJenis(entity.getIdJenis());
         dto.setName(entity.getNamaFile());
         dto.setNamaMenu(entity.getNamaMenu());
         dto.setStock(entity.getStock());

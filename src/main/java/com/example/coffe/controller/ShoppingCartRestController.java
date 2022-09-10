@@ -2,9 +2,7 @@ package com.example.coffe.controller;
 
 import com.example.coffe.model.dto.OrderDTO;
 import com.example.coffe.model.dto.ResponseOrderDTO;
-import com.example.coffe.model.entity.Customer;
-import com.example.coffe.model.entity.Menu;
-import com.example.coffe.model.entity.Order;
+import com.example.coffe.model.entity.*;
 import com.example.coffe.service.ServiceCustomer;
 import com.example.coffe.service.ServiceMenuImp;
 import com.example.coffe.service.ServiceOrderImp;
@@ -35,7 +33,7 @@ public class ShoppingCartRestController {
 
     private Logger logger = LoggerFactory.getLogger(ShoppingCartRestController.class);
 
-    @GetMapping("/getAllOrders")
+    @GetMapping("/getAllMenu")
     public ResponseEntity<List<Menu>> getAllProducts() {
 
         List<Menu> productList = serviceMenuImp.getAllProducts();
@@ -43,14 +41,30 @@ public class ShoppingCartRestController {
         return ResponseEntity.ok(productList);
     }
 
-    @GetMapping("/getOrders/{orderId}")
+    @GetMapping("/getAllOrders")
+    public ResponseEntity<List<Order>> getAllOrders() {
+
+        List<Order> productList = serviceOrderImp.getAllOrders();
+
+        return ResponseEntity.ok(productList);
+    }
+
+    @GetMapping("/getAllCart")
+    public ResponseEntity<List<ShoppingCart>> getAllCart() {
+
+        List<ShoppingCart> cart = serviceOrderImp.getAllCart();
+
+        return ResponseEntity.ok(cart);
+    }
+
+    @GetMapping("/getAllOrders/{orderId}")
     public ResponseEntity<Order> getOrderDetails(@PathVariable Integer orderId) {
 
         Order order = serviceOrderImp.getOrderDetail(orderId);
         return ResponseEntity.ok(order);
     }
 
-    @PostMapping("/placeOrder")
+    @PostMapping("/getAllOrders")
     public ResponseEntity<ResponseOrderDTO> placeOrder(@RequestBody OrderDTO orderDTO) {
         logger.info("Request Payload " + orderDTO.toString());
         ResponseOrderDTO responseOrderDTO = new ResponseOrderDTO();

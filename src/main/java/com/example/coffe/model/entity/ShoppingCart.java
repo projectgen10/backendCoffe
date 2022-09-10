@@ -70,15 +70,4 @@ public class ShoppingCart {
     public void setAmount(Float amount) {
         this.amount = amount;
     }
-
-    @Override
-    public String toString() {
-        return "ShoppingCart{" +
-                "id=" + id +
-                ", productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", quantity=" + quantity +
-                ", amount=" + amount +
-                '}';
-    }
 }

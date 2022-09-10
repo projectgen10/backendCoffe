@@ -22,7 +22,6 @@ public class OrderDTO {
         this.customerName = customerName;
         this.customerNotelp = customerNotelp;
     }
-
     public String getCustomerNotelp() {
         return customerNotelp;
     }
@@ -63,14 +62,4 @@ public class OrderDTO {
         this.customerName = customerName;
     }
 
-    @Override
-    public String toString() {
-        return "OrderDTO{" +
-                "orderDescription='" + orderDescription + '\'' +
-                ", cartItems=" + cartItems +
-                ", customerAlamat='" + customerAlamat + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", customerNotelp='" + customerNotelp + '\'' +
-                '}';
-    }
 }

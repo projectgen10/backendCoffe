@@ -7,6 +7,7 @@ public class ResponseOrderDTO {
     private String OrderDescription;
     private Integer orderId;
 
+
     public Float getAmount() {
         return amount;
     }
@@ -46,4 +47,5 @@ public class ResponseOrderDTO {
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
+
 }

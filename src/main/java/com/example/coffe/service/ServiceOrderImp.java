@@ -5,6 +5,7 @@ import com.example.coffe.model.entity.Order;
 import com.example.coffe.model.entity.ShoppingCart;
 import com.example.coffe.repository.MenuRepository;
 import com.example.coffe.repository.OrderRepository;
+import com.example.coffe.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public class ServiceOrderImp {
 
     @Autowired
     MenuRepository menuRepository;
+
+    @Autowired
+    ShoppingCartRepository shoppingCartRepository;
 
     public Order getOrderDetail(int orderId){
         Optional<Order> order = orderRepository.findById(orderId);
@@ -57,5 +61,13 @@ public class ServiceOrderImp {
 
     public Order saveOrder(Order order) {
         return orderRepository.save(order);
+    }
+
+    public List<Order> getAllOrders() {
+        return this.orderRepository.findAll();
+    }
+
+    public List<ShoppingCart> getAllCart(){
+        return this.shoppingCartRepository.findAll();
     }
 }
