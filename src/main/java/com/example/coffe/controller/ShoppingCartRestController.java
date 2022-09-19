@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
 
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="http://localhost:5173")
 @RestController
 @RequestMapping("/orders")
 public class ShoppingCartRestController {
