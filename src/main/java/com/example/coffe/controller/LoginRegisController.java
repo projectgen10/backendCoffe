@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Optional;
 
+@CrossOrigin(origins="http://localhost:8080")
 @RestController
 @RequestMapping("/user")
 public class LoginRegisController {

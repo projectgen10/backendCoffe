@@ -27,6 +27,10 @@ public class User {
     @JoinColumn(name = "idRole", insertable = false, updatable = false)
     private Roles roles;
 
+
+//    public enum role{
+//        admin,user
+//    }
     public User(){
 
     }
